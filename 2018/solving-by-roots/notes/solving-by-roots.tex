@@ -1,0 +1,216 @@
+\documentclass{article}
+
+\usepackage[margin=1.5cm]{geometry}
+
+%http://filoxus.blogspot.com/2008/01/how-to-insert-watermark-in-latex.html
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{color}
+\makeatletter
+\AddToShipoutPicture{%
+            \setlength{\@tempdimb}{.5\paperwidth}%
+            \setlength{\@tempdimc}{.5\paperheight}%
+            \setlength{\unitlength}{1pt}%
+            \put(\strip@pt\@tempdimb,\strip@pt\@tempdimc){%
+        \makebox(10,-200){\rotatebox{45}{\textcolor[gray]{0.65}%
+        {\Huge{DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT}}}}%
+            }%
+        }
+\makeatother
+
+
+\title{Solving Low Order Polynomials by Roots}
+\author{Perplexed Perspectives} 
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+This is a brief review of how to extract roots of quadratic,
+cubic, and quartic equations.  The material is neither new
+nor complete, but it is hoped to be pedagogically useful.
+The section on the quadratic is a little long, but the
+intention is to establish the basic ideas in the simple
+context.
+
+\section{The Quadratic}
+The formula for solving
+\begin{equation}\label{eq:standard-quadratic}
+ a x^2 + bx + c = 0
+\end{equation}
+is well known, but we will take a slightly novel approach.
+First, note that if $a=0$, this degenerates to a linear equation,
+so we take the case $a\ne$, so we are looking for roots to
+the corresponding monic polynomial, \emph{i.e.},
+\begin{equation}\label{eq:monic-quadratic}
+  x^2 + \frac{b}{a} x + \frac{c}{a} = 0.
+\end{equation} 
+This polynomial can be written as the product of its (unknown) roots
+\footnote{To be explicit, suppose $r_1$ is a root. 
+Then by synthetic division on can get 
+\begin{equation}
+  x^2 + (b/a)x + (c/a) = (x - r_1)P(x) + Q(x)
+\end{equation}
+where the degree of $P(x)$ is lower that of the original (quadratic)
+polynomial and the degree of $Q(x)$
+is less than that of the (linear) factor with ($Q(x)=0$ indentically
+as a special case).  In this particular case, because the
+factor $x-r_1$ is linear, $Q(x)$ must be a constant (possibly $0$),
+and the assumption that $r_1$ is a root gives:
+\begin{equation}
+ Q(r_1) = 0 + Q(r_1) =  (r_1 - r_1)P(r_1) + Q(r_1) = 0.
+\end{equation}
+Again, since $x-r_1$ is linear, the degree of $P(x)$ must be one
+less than the original polynomial, in this case linear, and further
+$P(x)$ to make the factorization work.  Thus one can write
+$P(x) = x - r_2$ for some (unknown) $r_2$.},
+$r_1$ and $r_2$ , so 
+\begin{equation}
+  x^2 + \frac{b}{a} x + \frac{c}{a} = (x - r_1) (x - r_2)
+\end{equation}
+ Note that this is
+an equality of polynomials, so that
+\begin{eqnarray}
+ r_1 + r_2 & = & -b/a 
+\label{eq:symmetric-quadratic1} \\
+ r_1 r_2 & =  & c/a.
+\label{eq:symmetric-quadratic2}
+\end{eqnarray}
+From a more elementary level, one can see that if
+$r_1$ and $r_2$ satisfy eqs~\ref{eq:symmetric-quadratic1} 
+and~\ref{eq:symmetric-quadratic2}, then each is a root
+of \ref{eq:standard-quadratic} (and indeed, the only roots, 
+again by syntehetic division)\footnote{Again, being very explicit,
+obvious $r_1$ and $r_2$ are roots of $(x-r1)(x-r2)$, and 
+eqs~(\ref{eq:symmetric-quadratic1} and~\ref{eq:symmetric-quadratic2} imply
+that this polynomial is the same as the one to be solved (up to a 
+factor of $a$).}.
+Now, knowing $r_1 + r_2$, it is clear that we would be done
+if we knew $r_1 - r_2$, because then we would just need to
+solve two linear equations in two unknowns.  Just to establish
+notation, if we have
+\begin{eqnarray}
+s_1 & = & r_1 + r_2 \\
+s_2 & = & r_1 - r_2 \\
+\end{eqnarray}
+then knowledge of $s_1$ and $s_2$ would allow one to solve
+or $r_1$ and $r_2$.
+Also, we display the elementary symmetric polynomials of
+the roots:
+\begin{eqnarray}
+e_1 & = & r_1 + r_2 = -b/a \\
+e_2 & = & r_1 r_2 = c/a.
+\end{eqnarray}
+
+Now we are ready for the trick.  Note that $r_1 - r_2$ is not symmetric
+in the variables $r_1$ and $r_2$ (indeed, it's antisymmetric, \emph{i.e.},
+what the values of $r_1$ and $r_2$ results in the negative of the
+original value).  However, $(r_1 - r_2)^2$ is symmetic in the variables,
+and indeed
+\begin{eqnarray}
+\left( r_1 - r_2 \right)^2 & = & r_1^2 - 2 r_1 r_2 + r_2^2 \\
+ & = & \left( r_1 + r_2 \right)^2 - 4 r_1 r_2 \\ 
+ & = & e_1 ^ 2 - 4 e_2.
+\end{eqnarray}
+So now we know that
+\begin{eqnarray}
+  r_1 + r_2 & = & s_1 = -b/a \\
+  r_1 - r_2 & = & s_2 = \sqrt{(b/a)^2 - 4(c/a)}.
+\end{eqnarray}
+Now we have two linear equations which can directly solved.
+There is a choice of sign in taking the square root, but
+changing that sign corresponds to swapping the values of
+$r_1$ and $r_2$.  Thus by taking the sum and difference
+of the above equations, one gets
+\begin{equation}
+  r_1, r_2 = \frac{-b \pm \sqrt{b^2 - 4 a c}}{2a}
+\end{equation}
+
+\section{The Cubic}
+Now, with only a little bit of cleverness, one can solve the
+cubic (thisis the \lq\lq Lagrange method\rq\rq{}).
+First, let's write the cubic in the following monic form:
+\begin{equation}
+  x^3 - e_1 x^2 + e_2 x - e_3 = 0
+\end{equation}
+The signs are chosen so that the the coefficients are the
+elementary symmetric polynomials in terms of the 
+(unknown) roots ($r_1$, $r_2$, $r_3$):
+\begin{eqnarray}
+ e_1 & = & r_1 + r_2 + r_3 \\
+ e_2 & = & r_1 r_2 + r_2 r_3 + r_3 r_1 \\
+ e_3 & = & r_1 r_2 r_3 
+\end{eqnarray}
+
+Now, we come to the one part which requires additional cleverness.
+Let $\zeta$ be a primitive third root of unit\footnote{That is,
+$\zeta = e^{2\pi i/3}$.  The other root, 
+$\zeta = e^{4\pi i/3}$, would also work.}, \emph{i.e.}:
+\begin{equation}
+ \zeta = -\frac{1}{2} + \frac{\sqrt{3}}{2}i.
+\end{equation}
+
+Now we take 
+\begin{eqnarray}
+s_1  =  r_1  & + r_2 & +  r_3 \\
+s_2  =  r_1  &  + \zeta r_2 & +  \zeta^2 r_3 \\
+s_3  =  r_1  & + \zeta^2 r_2 & +  \zeta r_3 \\
+\end{eqnarray}
+
+Let's take a moment to consider how the $s_i$'s are affected
+in we permute the roots.  First, consider the cyclic rotation
+\begin{equation}
+  r_1 = \tilde r_2 ,
+  r_2 = \tilde r_3 ,
+  r_3 = \tilde r_1 
+\end{equation}
+Then
+\begin{eqnarray}
+\tilde s_1 & = & \tilde r_1 + \tilde r_2 + \tilde r_3 \\
+       & = & r_3 + r_1 + r_2 \\
+       & = & s_1
+\end{eqnarray}
+and
+\begin{eqnarray}
+\tilde s_2 & = & \tilde r_1 + \zeta \tilde r_2 +
+                       \zeta^2 \tilde r_3 \\
+         & = & r_3 + \zeta \tilde r_1 +
+                       \zeta^2 \tilde r_2 \\
+         & = \zeta s_3
+\end{eqnarray}
+and similarly
+\begin{equation}
+  \tilde s_3 = \zeta^2 s_3.
+\end{equation}
+Similarly, swapping $r_2$ and $r_3$ correspond to 
+swapping $s_2$ and $s_3$.  This is sufficient to 
+prove\footnote{The symmetric group on $n$ objects
+is generated by an $n$ cycle  (12\ldots n) and 
+and a two cycle (12)}that the quantities $s_2 s_3$ and $s_2^3 + s_3^3$
+are symmetric in the roots.
+Explicityly calculations (recalling that $\zeta$ satisfies
+$\zeta^2 + \zeta + 1 = 0$) give
+\begin{eqnarray}
+  s_2 s_3 & = & r_1^2 + r_2^2 + r_3^2 - r_1 r_2 - r_2 r_3 - r_3 r_1\\
+     & = & e_1^2 - 3 e_2\\
+     & = & \omega_1
+\end{eqnarray}
+and
+\begin{eqnarray}
+ s_2 ^3 + s_3^3 & = & 2 r_1^3 + 2 r_2^3 + 2 r_3^3 - 3 r_1 r_2 r_3 \\
+   & = & 2 e_1^3 - 6 e_1 e_2 - 9 e_3 \\
+   & = & \omega_2.
+\end{eqnarray}
+where $\omega_1$ and $\omega_2$ have been introduced to summarize
+the expressions involving the $e_i$'s.
+
+Thus, we know the sum and product of $s_1^3$ and $s_2^3$.  That is,
+$s_1^3$ and $s_2^3$ are the roots of a quadratic whose cooeficients
+can be expressed in term of the the coefficients of the original
+cubic. Explicitly,
+\begin{equation}
+ s_1^3, s_2^3 = \frac{\omega_1 \pm \sqrt{\omega_1^2 - 4\omega_2}}{2}
+\end{equation}
+
+
+\end{document}
