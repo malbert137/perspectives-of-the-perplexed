@@ -152,9 +152,9 @@ $\zeta = e^{4\pi i/3}$, would also work.}, \emph{i.e.}:
 
 Now we take 
 \begin{eqnarray}
-s_1  =  r_1  & + r_2 & +  r_3 \\
-s_2  =  r_1  &  + \zeta r_2 & +  \zeta^2 r_3 \\
-s_3  =  r_1  & + \zeta^2 r_2 & +  \zeta r_3 \\
+s_1  =  r_1  & + r_2 & +  r_3 \label{eq:cube-lin1}\\
+s_2  =  r_1  &  + \zeta r_2 & +  \zeta^2 r_3 \label{eq:cube-lin2} \\
+s_3  =  r_1  & + \zeta^2 r_2 & +  \zeta r_3 \label{eq:cube-lin3} \\
 \end{eqnarray}
 
 Let's take a moment to consider how the $s_i$'s are affected
@@ -204,13 +204,44 @@ and
 where $\omega_1$ and $\omega_2$ have been introduced to summarize
 the expressions involving the $e_i$'s.
 
-Thus, we know the sum and product of $s_1^3$ and $s_2^3$.  That is,
-$s_1^3$ and $s_2^3$ are the roots of a quadratic whose cooeficients
+Thus, we know the sum and product of $s_2^3$ and $s_3^3$.  That is,
+$s_2^3$ and $s_3^3$ are the roots of a quadratic whose cooeficients
 can be expressed in term of the the coefficients of the original
 cubic. Explicitly,
 \begin{equation}
- s_1^3, s_2^3 = \frac{\omega_1 \pm \sqrt{\omega_1^2 - 4\omega_2}}{2}
+ s_2^3, s_3^3 = \frac{\omega_1 \pm \sqrt{\omega_1^2 - 4\omega_2}}{2}
 \end{equation}
+
+As $s_1 = e_1$ is simply the (negative of) the linear coefficient,
+once one has $s_2$ and $s_3$, one can immediately solve for the
+roots 
+\begin{eqnarray}
+  r_1 & = & \frac{1}{3} \left( s_1 + s_2 + s_3 \right) 
+                 \label{eq:cubic-root-1} \\
+  r_2 & = & \frac{1}{3} \left( s_1 + \zeta^2 s_2 + \zeta s_3 \right) 
+                 \label{eq:cubic-root-2}  \\
+  r_3 & = & \frac{1}{3} \left( s_1 + \zeta s_2 + \zeta^2 s_3 \right) 
+                 \label{eq:cubic-root-3}\\
+\end{eqnarray}
+Note that, in terms of the coefficients of the polynomial whose
+solution is sought, we know $s_2^3 + s_3^3$ and,
+as we know the product $s_2 s_3$, we know the product $s_1^3 s_2^3$.
+Thus we can solve a quadratic to get the values of
+$s_2^3$ and $s_3^3$.  In solving this quadratic, there is a
+choice of which root cooresponds to $s_2^3$ and which corresponds
+to $s_3^3$.  However, swapping $s_2$ and $s_3$ corresponds precisely
+to swapping $r_2$ and $r_3$ in 
+equations~\ref{eq:cubic-root-1}--\ref{eq:cubic-root-3}.
+Further, after solving the quadratic, we have $s_2^3$ and
+$s_3^3$, so the cube roots of each are required.  In general,
+each will have three distinct cube roots.  However, we actually
+know the product $s_2 s_3$, so if one chooses one of the cube
+roots, the other is forced.  Very explicitly, if
+one replaces $s_2$ with $\zeta s_2$, then one must replace
+$s_3$ with $\zeta^2 s_3$, and in 
+equations~\ref{eq:cubic-root-1}--\ref{eq:cubic-root-3}.
+the roots of the cubic are cyclically permuted.
+
 
 
 \end{document}
